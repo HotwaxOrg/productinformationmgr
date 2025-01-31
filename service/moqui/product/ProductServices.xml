@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchema="http://moqui.org/xml-service-definition.xml">
+    <service verb="fetch" noun="Product">
+        <in-parameters>
+            <parameter name="productId" entity-name="productinfo.product.Product"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="productList" type="List"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="productinfo.product.Product" list="productList" required="true">
+                <econdition field-name="productId"/>
+            </entity-find>
+        </actions>
+    </service>
+
+</services>
