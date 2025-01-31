@@ -20,6 +20,8 @@
                       short-alias="price">
             <key-map field-name="productId"/>
         </relationship>
+        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="assoc"/>
+        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="toassoc"/>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>
@@ -30,6 +32,8 @@
             <detail relationship="type"/>
             <detail relationship="content"/>
             <detail relationship="price"/>
+            <detail relationship="assoc"/>
+            <detail relationship="toassoc"/>
         </master>
     </entity>
 
@@ -94,6 +98,29 @@
             <moqui.basic.EnumerationType description="Dimension Type" enumTypeId="DimensionType"/>
             <moqui.basic.Enumeration description="weight" enumId="WEIGHT" enumTypeId="DimensionType"/>
             <moqui.basic.Enumeration description="height" enumId="HEIGHT" enumTypeId="DimensionType"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="ProductAssoc" package="productinfo.assoc">
+        <field name="productId" type="id" is-pk="true"/>
+        <field name="toProductId" type="id" is-pk="true"/>
+        <field name="fromDate" type="date" is-pk="true"/>
+        <field name="productAssocTypeEnumId" type="id"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="AssocType">
+            <key-map field-name="productAssocTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="productinfo.product.Product">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="one" related="productinfo.product.Product">
+            <key-map field-name="toProductId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Assoc Type" enumTypeId="AssocType"/>
+            <moqui.basic.Enumeration description="Variant" enumId="VARIANT" enumTypeId="AssocType"/>
+            <moqui.basic.Enumeration description="Marketing Package" enumId="MARKT_PACKAGE" enumTypeId="AssocType"/>
         </seed-data>
     </entity>
 </entities>
