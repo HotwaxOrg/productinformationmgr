@@ -12,6 +12,7 @@
             <entity-find entity-name="productinfo.product.Product" list="productList" required="true">
                 <econdition field-name="productId"/>
             </entity-find>
+<!--            <log message="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;${context.productList}-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"/>-->
         </actions>
     </service>
 
