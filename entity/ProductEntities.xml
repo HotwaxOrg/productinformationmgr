@@ -22,6 +22,7 @@
         </relationship>
         <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="assoc"/>
         <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="toassoc"/>
+        <relationship type="many" related="productinfo.productfeatureappl.ProductFeatureAppl" short-alias="features"/>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>
@@ -34,6 +35,7 @@
             <detail relationship="price"/>
             <detail relationship="assoc"/>
             <detail relationship="toassoc"/>
+            <detail relationship="features"/>
         </master>
     </entity>
 
@@ -121,6 +123,58 @@
             <moqui.basic.EnumerationType description="Assoc Type" enumTypeId="AssocType"/>
             <moqui.basic.Enumeration description="Variant" enumId="VARIANT" enumTypeId="AssocType"/>
             <moqui.basic.Enumeration description="Marketing Package" enumId="MARKT_PACKAGE" enumTypeId="AssocType"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="ProductFeature" package="productinfo.productfeature">
+        <field name="productFeatureId" type="id" is-pk="true"/>
+        <field name="productFeatureTypeEnumId" type="id"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="FeatureType"
+                      short-alias="ftype">
+            <key-map field-name="productFeatureTypeEnumId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.productfeatureappl.ProductFeatureAppl"
+                      short-alias="fappl">
+            <key-map field-name="productFeatureId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Feature Type" enumTypeId="FeatureType"/>
+            <moqui.basic.Enumeration description="Memory" enumId="MEMORY" enumTypeId="FeatureType"/>
+            <moqui.basic.Enumeration description="Color" enumId="COLOR" enumTypeId="FeatureType"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="ProductFeatureAppl" package="productinfo.productfeatureappl">
+        <field name="productId" type="id" is-pk="true"/>
+        <field name="productFeatureId" type="id" is-pk="true"/>
+        <field name="fromDate" type="date" is-pk="true"/>
+        <field name="applTypeEnumId" type="id"/>
+
+        <relationship type="one" related="productinfo.product.Product" short-alias="product">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="one" related="productinfo.productfeature.ProductFeature"
+                      short-alias="feature">
+            <key-map field-name="productFeatureId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.Enumeration" title="ApplyType">
+            <key-map field-name="applTypeEnumId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Apply Type" enumTypeId="ApplyType"/>
+            <moqui.basic.Enumeration description="Distinguishing Feature" enumId="DISTINGUISHING_FEAT"
+                                     enumTypeId="ApplyType"/>
+            <moqui.basic.Enumeration description="Optional Feature" enumId="OPTIONAL_FEATURE"
+                                     enumTypeId="ApplyType"/>
+            <moqui.basic.Enumeration description="Required Feature" enumId="REQUIRED_FEATURE"
+                                     enumTypeId="ApplyType"/>
+            <moqui.basic.Enumeration description="Selectable Feature" enumId="SELECTABLE_FEATURE"
+                                     enumTypeId="ApplyType"/>
+            <moqui.basic.Enumeration description="Standard Feature" enumId="STANDARD_FEATURE"
+                                     enumTypeId="ApplyType"/>
         </seed-data>
     </entity>
 </entities>
