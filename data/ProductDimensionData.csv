@@ -2,4 +2,4 @@ productinfo.productdimension.ProductDimension, demo
 
 productId, dimensionTypeEnumId, dimensionValue, valueUomId
 PROD10000, WEIGHT, 6.6, WT_oz
-PROD10001, WEIGHT, 2.5,  WT_lb 
+PROD10001, WEIGHT, 2.5,  WT_lb
