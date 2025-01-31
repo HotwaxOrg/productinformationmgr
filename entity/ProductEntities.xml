@@ -16,6 +16,10 @@
                       short-alias="content">
             <key-map field-name="productId"/>
         </relationship>
+        <relationship type="many" related="productinfo.productprice.ProductPrice"
+                      short-alias="price">
+            <key-map field-name="productId"/>
+        </relationship>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>
@@ -25,6 +29,7 @@
         <master>
             <detail relationship="type"/>
             <detail relationship="content"/>
+            <detail relationship="price"/>
         </master>
     </entity>
 
@@ -46,6 +51,27 @@
             <moqui.basic.EnumerationType description="Content Type" enumTypeId="ContentType"/>
             <moqui.basic.Enumeration description="DESCRIPTION" enumId="DESCRIPTION" enumTypeId="ContentType"/>
             <moqui.basic.Enumeration description="IMAGE" enumId="IMAGE" enumTypeId="ContentType"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="ProductPrice" package="productinfo.productprice" short-alias="price">
+        <field name="productId" type="id" not-null="true"/>
+        <field name="productPriceId" type="id" is-pk="true"/>
+        <field name="priceTypeEnumId" type="id"/>
+        <field name="productName" type="text-medium"/>
+        <field name="price" type="number-decimal"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="PriceType">
+            <key-map field-name="priceTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="productinfo.product.Product" short-alias="product">
+            <key-map field-name="productId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Price Type" enumTypeId="PriceType"/>
+            <moqui.basic.Enumeration description="List Price" enumId="LIST_PRICE" enumTypeId="PriceType"/>
+            <moqui.basic.Enumeration description="Promotional Price" enumId="PROMOTIONAL_PRICE" enumTypeId="PriceType"/>
         </seed-data>
     </entity>
 </entities>
