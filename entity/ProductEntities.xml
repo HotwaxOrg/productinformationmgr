@@ -74,4 +74,26 @@
             <moqui.basic.Enumeration description="Promotional Price" enumId="PROMOTIONAL_PRICE" enumTypeId="PriceType"/>
         </seed-data>
     </entity>
+
+    <entity entity-name="ProductDimension" package="productinfo.productdimension"
+            short-alias="dimension">
+        <field name="productId" type="id" is-pk="true"/>
+        <field name="dimensionTypeEnumId" type="id"/>
+        <field name="dimensionValue" type="number-decimal"/>
+        <field name="valueUomId" type="id"/>
+
+        <relationship type="one" related="productinfo.product.Product"/>
+        <relationship type="one" related="moqui.basic.Enumeration" title="DimensionType">
+            <key-map field-name="dimensionTypeEnumId"/>
+        </relationship>
+        <relationship type="one" title="Value" related="moqui.basic.Uom">
+            <key-map field-name="valueUomId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Dimension Type" enumTypeId="DimensionType"/>
+            <moqui.basic.Enumeration description="weight" enumId="WEIGHT" enumTypeId="DimensionType"/>
+            <moqui.basic.Enumeration description="height" enumId="HEIGHT" enumTypeId="DimensionType"/>
+        </seed-data>
+    </entity>
 </entities>
