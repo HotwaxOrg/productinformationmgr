@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchema="http://moqui.org/xsd/entity-definition-3.xsd">
+    <entity entity-name="Product" package="productinfo.product" short-alias="product">
+        <field name="productId" type="id" is-pk="true"/>
+        <field name="productTypeEnumId" type="id"/>
+        <field name="productName" type="text-medium"/>
+        <field name="isVirtual" type="text-short"/>
+        <field name="isVarient" type="text-short"/>
+        <field name="fromDate" type="date"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="ProductType" short-alias="type">
+            <key-map field-name="productTypeEnumId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.productcontent.ProductContent"
+                      short-alias="content">
+            <key-map field-name="productId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>
+            <moqui.basic.Enumeration description="Finished Good" enumId="FINISHED_GOOD" enumTypeId="ProductType"/>
+        </seed-data>
+
+        <master>
+            <detail relationship="type"/>
+            <detail relationship="content"/>
+        </master>
+    </entity>
+
+    <entity entity-name="ProductContent" package="productinfo.productcontent" short-alias="content">
+        <field name="productContentId" type="id" is-pk="true"/>
+        <field name="productId" type="id" not-null="true"/>
+        <field name="productContentTypeEnumId" type="id"/>
+        <field name="contentLocation" type="text-medium"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="ContentType"
+                      short-alias="contentType">
+            <key-map field-name="productContentTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="productinfo.product.Product" short-alias="product">
+            <key-map field-name="productId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Content Type" enumTypeId="ContentType"/>
+            <moqui.basic.Enumeration description="DESCRIPTION" enumId="DESCRIPTION" enumTypeId="ContentType"/>
+            <moqui.basic.Enumeration description="IMAGE" enumId="IMAGE" enumTypeId="ContentType"/>
+        </seed-data>
+    </entity>
+</entities>
