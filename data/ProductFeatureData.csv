@@ -1,0 +1,6 @@
+﻿productinfo.productfeature.ProductFeature, demo
+
+productFeatureId,productFeatureTypeEnumId
+128BG,MEMORY
+256BG,MEMORY
+BLACK,COLOR
