@@ -58,4 +58,18 @@
             </entity-find>
         </actions>
     </service>
+
+    <service verb="fetch" noun="ProductPrice">
+        <in-parameters>
+            <parameter name="productId" required="true" entity-name="productinfo.productprice.ProductPrice"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="priceList" required="true"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="productinfo.productprice.ProductPrice" list="priceList">
+                <econdition field-name="productId"/>
+            </entity-find>
+        </actions>
+    </service>
 </services>
