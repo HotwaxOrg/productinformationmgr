@@ -9,7 +9,7 @@
             <parameter name="productList" type="List"/>
         </out-parameters>
         <actions>
-            <entity-find entity-name="productinfo.product.Product" list="productList" required="true">
+            <entity-find entity-name="productinfo.product.Product" list="productList">
                 <econdition field-name="productId"/>
             </entity-find>
         </actions>
@@ -45,4 +45,17 @@
         </actions>
     </service>
 
+    <service verb="fetch" noun="ProductContent">
+        <in-parameters>
+            <parameter name="productId" required="true" entity-name="productinfo.productcontent.ProductContent"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="contentList" type="List"/>
+        </out-parameters>
+        <actions>
+            <entity-find entity-name="productinfo.productcontent.ProductContent" list="contentList">
+                <econdition field-name="productId"/>
+            </entity-find>
+        </actions>
+    </service>
 </services>
