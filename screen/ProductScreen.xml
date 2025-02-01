@@ -10,6 +10,16 @@
         <default-response type="none"/>
     </transition>
 
+    <transition name="updateProduct">
+        <service-call name="update#productinfo.product.Product"/>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="deleteProduct">
+        <service-call name="moqui.product.ProductServices.delete#Product"/>
+        <default-response type="none"/>
+    </transition>
+
     <widgets>
         <container-box>
             <box-header title="Get Product"/>
@@ -57,6 +67,11 @@
                         </default-field>
                     </field>
                     <field name="fromDate">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="thruDate">
                         <default-field>
                             <display/>
                         </default-field>
@@ -110,6 +125,11 @@
                             <text-line/>
                         </default-field>
                     </field>
+                    <field name="thruDate">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
                     <field name="createProductButton">
                         <default-field title="CreateProduct">
                             <submit/>
@@ -119,6 +139,107 @@
             </box-body>
         </container-box>
 
+        <container-box>
+            <box-header title="Update Product"/>
+            <box-body-nopad>
+                <form-list name="UpdateForm" list="productList" transition="updateProduct">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="productTypeEnumId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options text="${description ?: ''} [${enumId}]">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="ProductType"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="isVarient">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="isVirtual">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="fromDate">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="thruDate">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="updateButton">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body-nopad>
+        </container-box>
 
+        <container-box>
+            <box-header title="Delete Product"/>
+            <box-body-nopad>
+                <form-list name="DeleteForm" list="productList" transition="deleteProduct">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="isVarient">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="isVirtual">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="fromDate">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="thruDate">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="deleteButton">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body-nopad>
+        </container-box>
     </widgets>
 </screen>

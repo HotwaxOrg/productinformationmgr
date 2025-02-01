@@ -8,6 +8,7 @@
         <field name="isVirtual" type="text-short"/>
         <field name="isVarient" type="text-short"/>
         <field name="fromDate" type="date"/>
+        <field name="thruDate" type="date"/>
 
         <relationship type="one" related="moqui.basic.Enumeration" title="ProductType" short-alias="type">
             <key-map field-name="productTypeEnumId"/>
@@ -20,9 +21,24 @@
                       short-alias="price">
             <key-map field-name="productId"/>
         </relationship>
-        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="assoc"/>
-        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="toassoc"/>
-        <relationship type="many" related="productinfo.productfeatureappl.ProductFeatureAppl" short-alias="features"/>
+        <relationship type="many" related="productinfo.productdimension.ProductDimension"
+                      short-alias="dimension">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="assoc">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.assoc.ProductAssoc" short-alias="toassoc">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.productfeatureappl.ProductFeatureAppl"
+                      short-alias="features">
+            <key-map field-name="productId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.productcategorymember.ProductCategoryMember"
+                      short-alias="category">
+            <key-map field-name="productId"/>
+        </relationship>
 
         <seed-data>
             <moqui.basic.EnumerationType description="Product Type" enumTypeId="ProductType"/>
@@ -108,6 +124,7 @@
         <field name="toProductId" type="id" is-pk="true"/>
         <field name="fromDate" type="date" is-pk="true"/>
         <field name="productAssocTypeEnumId" type="id"/>
+        <field name="thruDate" type="date"/>
 
         <relationship type="one" related="moqui.basic.Enumeration" title="AssocType">
             <key-map field-name="productAssocTypeEnumId"/>
@@ -151,6 +168,7 @@
         <field name="productFeatureId" type="id" is-pk="true"/>
         <field name="fromDate" type="date" is-pk="true"/>
         <field name="applTypeEnumId" type="id"/>
+        <field name="thruDate" type="date"/>
 
         <relationship type="one" related="productinfo.product.Product" short-alias="product">
             <key-map field-name="productId"/>
@@ -176,5 +194,32 @@
             <moqui.basic.Enumeration description="Standard Feature" enumId="STANDARD_FEATURE"
                                      enumTypeId="ApplyType"/>
         </seed-data>
+    </entity>
+
+    <entity entity-name="ProductCategory" package="productinfo.productcategory">
+        <field name="productCategoryId" type="id" is-pk="true"/>
+        <field name="productCategoryTypeEnumId" type="id"/>
+        <field name="categoryName" type="text-medium"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="CategoryType">
+            <key-map field-name="productCategoryTypeEnumId"/>
+        </relationship>
+        <relationship type="many" related="productinfo.productcategorymember.ProductCategoryMember"
+                      short-alias="member"/>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Category Type" enumTypeId="CategoryType"/>
+            <moqui.basic.Enumeration description="Catalog Category" enumId="CATALOG_CATEGORY" enumTypeId="CategoryType"/>
+        </seed-data>
+    </entity>
+
+    <entity entity-name="ProductCategoryMember" package="productinfo.productcategorymember">
+        <field name="productId" type="id" is-pk="true"/>
+        <field name="productCategoryId" type="id" is-pk="true"/>
+        <field name="fromDate" type="date" is-pk="true"/>
+        <field name="thruDate" type="date"/>
+
+        <relationship type="one" related="productinfo.product.Product" short-alias="product"/>
+        <relationship type="one" related="productinfo.productcategory.ProductCategory" short-alias="member"/>
     </entity>
 </entities>

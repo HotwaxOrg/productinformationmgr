@@ -12,7 +12,36 @@
             <entity-find entity-name="productinfo.product.Product" list="productList" required="true">
                 <econdition field-name="productId"/>
             </entity-find>
-<!--            <log message="-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;${context.productList}-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;"/>-->
+        </actions>
+    </service>
+
+    <service verb="delete" noun="Product">
+        <in-parameters>
+            <parameter name="productId" required="true" entity-name="productinfo.product.Product"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="productId"/>
+        </out-parameters>
+        <actions>
+            <!-- Find the Product record -->
+            <entity-find-one value-field="product" entity-name="productinfo.product.Product">
+                <econdition field-name="productId" value="productId"/>
+            </entity-find-one>
+
+            <entity-delete-related value-field="product" relationship-name="content"/>
+
+            <entity-delete-related value-field="product" relationship-name="price"/>
+
+            <entity-delete-related value-field="product" relationship-name="dimension"/>
+
+            <entity-delete-related value-field="product" relationship-name="assoc"/>
+            <entity-delete-related value-field="product" relationship-name="toassoc"/>
+
+            <entity-delete-related value-field="product" relationship-name="features"/>
+
+            <entity-delete-related value-field="product" relationship-name="category"/>
+
+            <entity-delete value-field="product"/>
         </actions>
     </service>
 
