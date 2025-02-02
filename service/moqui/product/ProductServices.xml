@@ -47,7 +47,7 @@
 
     <service verb="fetch" noun="ProductContent">
         <in-parameters>
-            <parameter name="productId" required="true" entity-name="productinfo.productcontent.ProductContent"/>
+            <parameter name="productId" entity-name="productinfo.productcontent.ProductContent"/>
         </in-parameters>
         <out-parameters>
             <parameter name="contentList" type="List"/>
