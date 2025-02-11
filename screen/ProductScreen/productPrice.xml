@@ -39,7 +39,7 @@
         <container-box>
             <box-header title="Product Price"/>
             <box-body>
-                <form-list name="ContentList" list="priceList">
+                <form-list name="PriceList" list="priceList">
                     <field name="productId">
                         <default-field>
                             <display/>
@@ -72,7 +72,7 @@
         <container-box>
             <box-header title="CreatingProductContent"/>
             <box-body>
-                <!-- Creating product content-->
+                <!-- Creating product price-->
                 <form-single name="CreateProductPrice" transition="createProductPrice">
                     <field name="productId">
                         <default-field>
@@ -115,44 +115,45 @@
             </box-body>
         </container-box>
 
-        <!--        Updating product content-->
+        <!--        Updating product price-->
         <container-box>
             <box-header title="UpdateProductContent"/>
             <box-body>
-                <form-list list="contentList" name="UpdateProductContent" transition="updateProductContent">
-                    <field name="productContentId">
+                <form-list list="priceList" name="UpdateProductPrice" transition="updateProductPrice">
+                    <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentTypeEnumId">
+                    <field name="productPriceId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
                         <default-field>
                             <drop-down allow-empty="true" style="">
                                 <entity-options text="${description ?: ''} [${enumId}]">
                                     <entity-find entity-name="moqui.basic.Enumeration">
-                                        <econdition field-name="enumTypeId" value="ContentType"/>
+                                        <econdition field-name="enumTypeId" value="PriceType"/>
                                         <order-by field-name="description"/>
                                     </entity-find>
                                 </entity-options>
                             </drop-down>
                         </default-field>
                     </field>
-                    <field name="productId">
+                    <field name="productName">
                         <default-field>
-                            <drop-down allow-empty="true" style="">
-                                <entity-options text="${productId}">
-                                    <entity-find entity-name="productinfo.product.Product"/>
-                                </entity-options>
-                            </drop-down>
+                            <text-line size="15"/>
                         </default-field>
                     </field>
-                    <field name="contentLocation">
+                    <field name="price">
                         <default-field>
-                            <display/>
+                            <text-line/>
                         </default-field>
                     </field>
-                    <field name="updateProductContent">
-                        <default-field>
+                    <field name="updateProductPriceButton">
+                        <default-field title="UpdateProductPrice">
                             <submit/>
                         </default-field>
                     </field>
@@ -160,33 +161,38 @@
             </box-body>
         </container-box>
 
-        <!--        Deleting a product content -->
+        <!--        Deleting a product price -->
         <container-box>
             <box-header title="DeleteProductContent"/>
             <box-body>
-                <form-list list="contentList" name="DeleteProductContent" transition="deleteProductContent">
-                    <field name="productContentId">
-                        <default-field>
-                            <display/>
-                        </default-field>
-                    </field>
-                    <field name="productContentTypeEnumId">
-                        <default-field>
-                            <display/>
-                        </default-field>
-                    </field>
+                <form-list list="priceList" name="DeleteProductPrice" transition="deleteProductPrice">
                     <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="contentLocation">
+                    <field name="productPriceId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="deleteProductContent">
+                    <field name="priceTypeEnumId">
                         <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="price">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="deleteProductPriceButton">
+                        <default-field title="DeleteProductPrice">
                             <submit/>
                         </default-field>
                     </field>
