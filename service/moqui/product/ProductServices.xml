@@ -61,7 +61,7 @@
 
     <service verb="fetch" noun="ProductPrice">
         <in-parameters>
-            <parameter name="productId" required="true" entity-name="productinfo.productprice.ProductPrice"/>
+            <parameter name="productId" entity-name="productinfo.productprice.ProductPrice"/>
         </in-parameters>
         <out-parameters>
             <parameter name="priceList" required="true"/>
