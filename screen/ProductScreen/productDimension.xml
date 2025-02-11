@@ -67,37 +67,37 @@
         <container-box>
             <box-header title="CreatingProductContent"/>
             <box-body>
-                <!-- Creating product content-->
-                <form-single name="CreateProductContent" transition="createProductContent">
+                <!-- Creating product dimension-->
+                <form-single name="CreateProductDimension" transition="createProductDimension">
                     <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentTypeEnumId">
+                    <field name="dimensionTypeEnumId">
                         <default-field>
                             <drop-down allow-empty="true" style="">
                                 <entity-options text="${description ?: ''} [${enumId}]">
                                     <entity-find entity-name="moqui.basic.Enumeration">
-                                        <econdition field-name="enumTypeId" value="ContentType"/>
+                                        <econdition field-name="enumTypeId" value="DimensionType"/>
                                         <order-by field-name="description"/>
                                     </entity-find>
                                 </entity-options>
                             </drop-down>
                         </default-field>
                     </field>
-                    <field name="productContentId">
-                        <default-field>
-                            <text-line size="15"/>
-                        </default-field>
-                    </field>
-                    <field name="contentLocation">
+                    <field name="dimensionValue">
                         <default-field>
                             <text-line/>
                         </default-field>
                     </field>
-                    <field name="createProductContentButton">
-                        <default-field title="CreateProductContent">
+                    <field name="valueUomId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="createProductDimensionButton">
+                        <default-field title="CreateProductDimension">
                             <submit/>
                         </default-field>
                     </field>
@@ -105,43 +105,39 @@
             </box-body>
         </container-box>
 
-        <!--        Updating product content-->
+        <!--        Updating product dimension-->
         <container-box>
-            <box-header title="UpdateProductContent"/>
+            <box-header title="UpdateProductDimension"/>
             <box-body>
-                <form-list list="contentList" name="UpdateProductContent" transition="updateProductContent">
-                    <field name="productContentId">
+                <form-list list="dimensionList" name="UpdateProductDimension" transition="updateProductDimension">
+                    <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentTypeEnumId">
+                    <field name="dimensionTypeEnumId">
                         <default-field>
                             <drop-down allow-empty="true" style="">
                                 <entity-options text="${description ?: ''} [${enumId}]">
                                     <entity-find entity-name="moqui.basic.Enumeration">
-                                        <econdition field-name="enumTypeId" value="ContentType"/>
+                                        <econdition field-name="enumTypeId" value="DimensionType"/>
                                         <order-by field-name="description"/>
                                     </entity-find>
                                 </entity-options>
                             </drop-down>
                         </default-field>
                     </field>
-                    <field name="productId">
+                    <field name="dimensionValue">
                         <default-field>
-                            <drop-down allow-empty="true" style="">
-                                <entity-options text="${productId}">
-                                    <entity-find entity-name="productinfo.product.Product"/>
-                                </entity-options>
-                            </drop-down>
+                            <text-line/>
                         </default-field>
                     </field>
-                    <field name="contentLocation">
+                    <field name="valueUomId">
                         <default-field>
-                            <display/>
+                            <text-line/>
                         </default-field>
                     </field>
-                    <field name="updateProductContent">
+                    <field name="updateProductDimensionButton">
                         <default-field>
                             <submit/>
                         </default-field>
@@ -150,32 +146,32 @@
             </box-body>
         </container-box>
 
-        <!--        Deleting a product content -->
+        <!--        Deleting a product dimension -->
         <container-box>
             <box-header title="DeleteProductContent"/>
             <box-body>
-                <form-list list="contentList" name="DeleteProductContent" transition="deleteProductContent">
-                    <field name="productContentId">
-                        <default-field>
-                            <display/>
-                        </default-field>
-                    </field>
-                    <field name="productContentTypeEnumId">
-                        <default-field>
-                            <display/>
-                        </default-field>
-                    </field>
+                <form-list list="dimensionList" name="DeleteProductDimension" transition="deleteProductDimension">
                     <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="contentLocation">
+                    <field name="dimensionTypeEnumId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="deleteProductContent">
+                    <field name="dimensionValue">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="valueUomId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="deleteProductDimension">
                         <default-field>
                             <submit/>
                         </default-field>
