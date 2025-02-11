@@ -72,4 +72,19 @@
             </entity-find>
         </actions>
     </service>
+
+    <service verb="fetch" noun="ProductDimension">
+        <in-parameters>
+            <parameter name="productId" entity-name="productinfo.productdimension.ProductDimension"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="dimensionList" type="List"/>
+        </out-parameters>
+        <actions>
+            
+            <entity-find entity-name="productinfo.productdimension.ProductDimension" list="dimensionList">
+                <econdition field-name="productId"/>
+            </entity-find>
+        </actions>
+    </service>
 </services>
