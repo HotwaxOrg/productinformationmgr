@@ -14,6 +14,13 @@
         </actions>
         <default-response url="../productPrice"/>
     </transition>
+    <transition name="productDimension">
+        <path-parameter name="productId"/>
+        <actions>
+            <service-call name="moqui.product.ProductServices.fetch#ProductDimension"/>
+        </actions>
+        <default-response url="../productDimension"/>
+    </transition>
 
     <actions>
         <service-call name="moqui.product.ProductServices.fetch#Product" in-map="[productId:productId]" out-map="context"/>
@@ -279,6 +286,19 @@
                 <form-list list="productList" name="GetProdcuctPrice" transition="productPrice">
                     <field name="submitButton">
                         <default-field title="GetProductPrice">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body-nopad>
+        </container-box>
+
+        <container-box>
+            <box-header title="Get Product Dimension"/>
+            <box-body-nopad>
+                <form-list list="productList" name="GetProdcuctDimension" transition="productDimension">
+                    <field name="submitButton">
+                        <default-field title="GetProductDimension">
                             <submit/>
                         </default-field>
                     </field>
