@@ -6,18 +6,18 @@
         <service-call name="moqui.product.ProductServices.fetch#ProductPrice" in-map="[productId:productId]" out-map="context"/>
     </actions>
 
-    <transition name="createProductContent">
-        <service-call name="create#productinfo.productcontent.ProductContent"/>
+    <transition name="createProductPrice">
+        <service-call name="create#productinfo.productprice.ProductPrice"/>
         <default-response type="none"/>
     </transition>
 
-    <transition name="updateProductContent">
-        <service-call name="update#productinfo.productcontent.ProductContent"/>
+    <transition name="updateProductPrice">
+        <service-call name="update#productinfo.productprice.ProductPrice"/>
         <default-response type="none"/>
     </transition>
 
-    <transition name="deleteProductContent">
-        <service-call name="delete#productinfo.productcontent.ProductContent"/>
+    <transition name="deleteProductPrice">
+        <service-call name="delete#productinfo.productprice.ProductPrice"/>
         <default-response type="none"/>
     </transition>
     <widgets>
@@ -37,20 +37,30 @@
             </box-body-nopad>
         </container-box>
         <container-box>
-            <box-header title="Product Content"/>
+            <box-header title="Product Price"/>
             <box-body>
-                <form-list name="ContentList" list="contentList">
+                <form-list name="ContentList" list="priceList">
                     <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentId">
+                    <field name="productPriceId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentTypeEnumId">
+                    <field name="priceTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="price">
                         <default-field>
                             <display/>
                         </default-field>
@@ -63,36 +73,41 @@
             <box-header title="CreatingProductContent"/>
             <box-body>
                 <!-- Creating product content-->
-                <form-single name="CreateProductContent" transition="createProductContent">
+                <form-single name="CreateProductPrice" transition="createProductPrice">
                     <field name="productId">
                         <default-field>
                             <display/>
                         </default-field>
                     </field>
-                    <field name="productContentTypeEnumId">
+                    <field name="productPriceId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
                         <default-field>
                             <drop-down allow-empty="true" style="">
                                 <entity-options text="${description ?: ''} [${enumId}]">
                                     <entity-find entity-name="moqui.basic.Enumeration">
-                                        <econdition field-name="enumTypeId" value="ContentType"/>
+                                        <econdition field-name="enumTypeId" value="PriceType"/>
                                         <order-by field-name="description"/>
                                     </entity-find>
                                 </entity-options>
                             </drop-down>
                         </default-field>
                     </field>
-                    <field name="productContentId">
+                    <field name="productName">
                         <default-field>
                             <text-line size="15"/>
                         </default-field>
                     </field>
-                    <field name="contentLocation">
+                    <field name="price">
                         <default-field>
                             <text-line/>
                         </default-field>
                     </field>
-                    <field name="createProductContentButton">
-                        <default-field title="CreateProductContent">
+                    <field name="createProductPriceButton">
+                        <default-field title="CreateProductPrice">
                             <submit/>
                         </default-field>
                     </field>
