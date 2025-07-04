@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchema="http://moqui.org/xml-screen-3.xsd" require-authentication="anonymous-all"
+        default-menu-index="3">
+    <path-parameter name="productId"/>
+    <actions>
+        <service-call name="moqui.product.ProductServices.fetch#ProductDimension" in-map="[productId:productId]" out-map="context"/>
+    </actions>
+
+    <transition name="createProductDimension">
+        <service-call name="create#productinfo.productdimension.ProductDimension"/>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="updateProductDimension">
+        <service-call name="update#productinfo.productdimension.ProductDimension"/>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="deleteProductDimension">
+        <service-call name="delete#productinfo.productdimension.ProductDimension"/>
+        <default-response type="none"/>
+    </transition>
+    <widgets>
+        <container-box>
+            <box-header title="Enter Product Id"/>
+            <box-body-nopad>
+                <form-single name="GetProduct" transition=".">
+                    <field name="productId">
+                        <default-field><text-line/></default-field>
+                    </field>
+                    <field name="getProduct">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-single>
+            </box-body-nopad>
+        </container-box>
+        <container-box>
+            <box-header title="Product Dimension"/>
+            <box-body>
+                <form-list name="DimensionList" list="dimensionList">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionValue">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="valueUomId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+        <container-box>
+            <box-header title="CreatingProductContent"/>
+            <box-body>
+                <!-- Creating product dimension-->
+                <form-single name="CreateProductDimension" transition="createProductDimension">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionTypeEnumId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options text="${description ?: ''} [${enumId}]">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="DimensionType"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="dimensionValue">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="valueUomId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="createProductDimensionButton">
+                        <default-field title="CreateProductDimension">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-single>
+            </box-body>
+        </container-box>
+
+        <!--        Updating product dimension-->
+        <container-box>
+            <box-header title="UpdateProductDimension"/>
+            <box-body>
+                <form-list list="dimensionList" name="UpdateProductDimension" transition="updateProductDimension">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionTypeEnumId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options text="${description ?: ''} [${enumId}]">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="DimensionType"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="dimensionValue">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="valueUomId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="updateProductDimensionButton">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+        <!--        Deleting a product dimension -->
+        <container-box>
+            <box-header title="DeleteProductContent"/>
+            <box-body>
+                <form-list list="dimensionList" name="DeleteProductDimension" transition="deleteProductDimension">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="dimensionValue">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="valueUomId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="deleteProductDimension">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+    </widgets>
+</screen>

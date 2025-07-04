@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchema="http://moqui.org/xml-screen-3.xsd" require-authentication="anonymous-all"
+        default-menu-index="3">
+    <actions>
+        <service-call name="moqui.product.ProductServices.fetch#ProductPrice" in-map="[productId:productId]" out-map="context"/>
+    </actions>
+
+    <transition name="createProductPrice">
+        <service-call name="create#productinfo.productprice.ProductPrice"/>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="updateProductPrice">
+        <service-call name="update#productinfo.productprice.ProductPrice"/>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="deleteProductPrice">
+        <service-call name="delete#productinfo.productprice.ProductPrice"/>
+        <default-response type="none"/>
+    </transition>
+    <widgets>
+        <container-box>
+            <box-header title="Enter Product Id"/>
+            <box-body-nopad>
+                <form-single name="GetProduct" transition=".">
+                    <field name="productId">
+                        <default-field><text-line/></default-field>
+                    </field>
+                    <field name="getProduct">
+                        <default-field>
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-single>
+            </box-body-nopad>
+        </container-box>
+        <container-box>
+            <box-header title="Product Price"/>
+            <box-body>
+                <form-list name="PriceList" list="priceList">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productPriceId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="price">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+        <container-box>
+            <box-header title="CreatingProductContent"/>
+            <box-body>
+                <!-- Creating product price-->
+                <form-single name="CreateProductPrice" transition="createProductPrice">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productPriceId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options text="${description ?: ''} [${enumId}]">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="PriceType"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <text-line size="15"/>
+                        </default-field>
+                    </field>
+                    <field name="price">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="createProductPriceButton">
+                        <default-field title="CreateProductPrice">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-single>
+            </box-body>
+        </container-box>
+
+        <!--        Updating product price-->
+        <container-box>
+            <box-header title="UpdateProductContent"/>
+            <box-body>
+                <form-list list="priceList" name="UpdateProductPrice" transition="updateProductPrice">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productPriceId">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
+                        <default-field>
+                            <drop-down allow-empty="true" style="">
+                                <entity-options text="${description ?: ''} [${enumId}]">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="PriceType"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <text-line size="15"/>
+                        </default-field>
+                    </field>
+                    <field name="price">
+                        <default-field>
+                            <text-line/>
+                        </default-field>
+                    </field>
+                    <field name="updateProductPriceButton">
+                        <default-field title="UpdateProductPrice">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+        <!--        Deleting a product price -->
+        <container-box>
+            <box-header title="DeleteProductContent"/>
+            <box-body>
+                <form-list list="priceList" name="DeleteProductPrice" transition="deleteProductPrice">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productPriceId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="priceTypeEnumId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="productName">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="price">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="deleteProductPriceButton">
+                        <default-field title="DeleteProductPrice">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body>
+        </container-box>
+
+    </widgets>
+</screen>

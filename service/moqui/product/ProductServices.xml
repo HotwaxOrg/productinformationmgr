@@ -61,13 +61,28 @@
 
     <service verb="fetch" noun="ProductPrice">
         <in-parameters>
-            <parameter name="productId" required="true" entity-name="productinfo.productprice.ProductPrice"/>
+            <parameter name="productId" entity-name="productinfo.productprice.ProductPrice"/>
         </in-parameters>
         <out-parameters>
             <parameter name="priceList" required="true"/>
         </out-parameters>
         <actions>
             <entity-find entity-name="productinfo.productprice.ProductPrice" list="priceList">
+                <econdition field-name="productId"/>
+            </entity-find>
+        </actions>
+    </service>
+
+    <service verb="fetch" noun="ProductDimension">
+        <in-parameters>
+            <parameter name="productId" entity-name="productinfo.productdimension.ProductDimension"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="dimensionList" type="List"/>
+        </out-parameters>
+        <actions>
+            
+            <entity-find entity-name="productinfo.productdimension.ProductDimension" list="dimensionList">
                 <econdition field-name="productId"/>
             </entity-find>
         </actions>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchema="http://moqui.org/xml-screen-3.xsd" require-authentication="anonymous-all">
+<!--    Transition to different pages -->
     <transition name="productContent">
-        <path-parameter name="productId"/>
-        <actions>
-            <service-call name="moqui.product.ProductServices.fetch#ProductContent" />
-        </actions>
         <default-response url="../productContent"/>
+    </transition>
+    <transition name="productPrice">
+        <default-response url="../productPrice"/>
+    </transition>
+    <transition name="productDimension">
+        <default-response url="../productDimension"/>
     </transition>
 
     <actions>
+        <log message="+++++++++++++${productId}++++++++++++"/>
         <service-call name="moqui.product.ProductServices.fetch#Product" in-map="[productId:productId]" out-map="context"/>
     </actions>
 
@@ -257,8 +261,34 @@
             <box-header title="Get Product Content"/>
             <box-body-nopad>
                 <form-list name="GetProductContent" transition="productContent" list="productList">
+                    <field name="getProductContent">
+                        <default-field >
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body-nopad>
+        </container-box>
+
+        <container-box>
+            <box-header title="Get Product Price"/>
+            <box-body-nopad>
+                <form-list list="productList" name="GetProdcuctPrice" transition="productPrice">
                     <field name="submitButton">
-                        <default-field title="GetProductContent">
+                        <default-field title="GetProductPrice">
+                            <submit/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </box-body-nopad>
+        </container-box>
+
+        <container-box>
+            <box-header title="Get Product Dimension"/>
+            <box-body-nopad>
+                <form-list list="productList" name="GetProdcuctDimension" transition="productDimension">
+                    <field name="submitButton">
+                        <default-field title="GetProductDimension">
                             <submit/>
                         </default-field>
                     </field>
