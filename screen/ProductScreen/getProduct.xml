@@ -261,6 +261,11 @@
             <box-header title="Get Product Content"/>
             <box-body-nopad>
                 <form-list name="GetProductContent" transition="productContent" list="productList">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
                     <field name="getProductContent">
                         <default-field >
                             <submit/>
@@ -274,6 +279,11 @@
             <box-header title="Get Product Price"/>
             <box-body-nopad>
                 <form-list list="productList" name="GetProdcuctPrice" transition="productPrice">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
                     <field name="submitButton">
                         <default-field title="GetProductPrice">
                             <submit/>
@@ -287,6 +297,11 @@
             <box-header title="Get Product Dimension"/>
             <box-body-nopad>
                 <form-list list="productList" name="GetProdcuctDimension" transition="productDimension">
+                    <field name="productId">
+                        <default-field>
+                            <display/>
+                        </default-field>
+                    </field>
                     <field name="submitButton">
                         <default-field title="GetProductDimension">
                             <submit/>

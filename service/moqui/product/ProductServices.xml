@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:noNamespaceSchema="http://moqui.org/xml-service-definition.xml">
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
     <service verb="fetch" noun="Product">
         <in-parameters>
             <parameter name="productId" entity-name="productinfo.product.Product"/>
@@ -10,7 +9,7 @@
         </out-parameters>
         <actions>
             <entity-find entity-name="productinfo.product.Product" list="productList">
-                <econdition field-name="productId"/>
+                <econdition field-name="productId" ignore-if-empty="true"/>
             </entity-find>
         </actions>
     </service>
